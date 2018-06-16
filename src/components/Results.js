@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import axios from 'Axios';
+import axios from 'axios';
 
 
 
@@ -12,12 +12,23 @@ class Results extends Component {
         }
     }
 
-    //this should be done server-side with a axios.post()??
-    // addChore(){
+    // this should be done server-side with a axios.post()??
+    // addChore(props){
     //     this.setState({
-    //         results: props.newTask
+    //         results: props.inputResults
     //     })
     //   }
+
+      sendInput = () => {
+        
+        axios.get('./api/tasks').then(response => {
+            console.log(response)
+            this.setState({
+                results: response.name
+            })
+        })
+      }
+    
 
 
     render() {
