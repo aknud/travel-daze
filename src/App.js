@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Button from './components/Button';
 import Results from './components/Results';
-import axios from 'axios';
+//import axios from 'axios';
 
 
 
@@ -14,14 +14,14 @@ class App extends Component {
       input: ''
     }
   }
-  componentDidMount() {
-    axios.get('./api/tasks').then(response => {
-      console.log(1111111, response)
-      // this.setState({
-      //   results: response.name
-      // })
-    })
-  }
+  // componentDidMount() {
+  //   axios.get('./api/tasks').then(response => {
+  //     console.log(1111111, response)
+  //     this.setState({
+  //       results: response.name
+  //     })
+  //   })
+  // }
 
   updateInput(val) {
     this.setState({ input: val })
