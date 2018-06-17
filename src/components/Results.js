@@ -1,58 +1,47 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Button from './Button'
+// import Button from './Button'
 
 
 
 class Results extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        console.log(111, props)
+        console.log(333333, this.props);
 
         this.state = {
-            results: []
+            results: this.props.inputResults,
+            resultsDisplay: []
         }
+        
+        // this.state.results = this.state.results.bind(this)
+        console.log(222, this.state)
     }
 
-    // this should be done server-side with a axios.post()??
-    // addChore(props){
-    //     this.setState({
-    //         results: props.inputResults
-    //     })
-    //   }
-    componentDidMount() {
+    componentDidMount = () => {
         axios.get('./api/tasks').then(response => {
-            console.log('Get response data: ', response.data)
+            // console.log(99999, response)
             this.setState({
-                results: response.data
+               resultsDisplay: response.data
             })
         })
     }
-    // sendInput = () => {
-    //     axios.get('./api/tasks').then(response => {
-    //         console.log(response)
-    //         this.setState({
-    //             results: response.name
-    //         })
-    //     })
-    // }
-
-
 
 
     render() {
-        console.log(55555555, this.state.results)
-        let resultsList = this.state.results.map((item, ind) => {
+        console.log('Check results from state', this.state.resultsDisplay)
+        let resultsList = this.state.resultsDisplay.map((item) => {
             return (
-                <div key={ind}>
+                <div key={item.id}>
                     <h3>{item.name}</h3>
                 </div>
             )
         })
-        console.log(77777, resultsList)
+        
 
         return (
             <div>
-                <Button /*onClick={() => this.sendInput}*/ name='render list' type='get' />
                 {resultsList}
             </div>
         );

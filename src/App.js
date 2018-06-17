@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import './App.css';
 import Button from './components/Button';
 import Results from './components/Results';
-//import axios from 'axios';
 
 
 
@@ -11,33 +11,25 @@ class App extends Component {
     super();
 
     this.state = {
-      input: ''
+      input: '',
+      resultList: []
     }
   }
-  // componentDidMount() {
-  //   axios.get('./api/tasks').then(response => {
-  //     console.log(1111111, response)
-  //     this.setState({
-  //       results: response.name
-  //     })
-  //   })
-  // }
 
-  updateInput(val) {
-    this.setState({ input: val })
+  updateInput =(val) => {
+    return this.setState({ input: val })
   }
 
-  // sendInput = () => {
-  //   this.state.input
-  //   axios.get('./api/tasks').then()
-  // }
 
-
-  // newTaskUpdate(){
-  //   this.setState({
-  //     task: this.state.input
-  //   }) 
-  // }
+  newTaskUpdate=()=>{
+    console.log(55555, this)
+    axios.post('/api/tasks', {name: this.state.input }).then(response => {
+      console.log(99999, response)
+      return this.setState({
+      resultList: response.data
+    })
+    }) 
+  }
 
 
   render() {
@@ -49,8 +41,8 @@ class App extends Component {
           onChange={(event) => this.updateInput(event.target.value)}
           value={this.state.input}
           placeholder="Create a new task" />
-        <Button /*click={newTaskUpdate}*/ name='Add' type='create' />
-        <Results inputResults={this.state.input} />
+        <Button click={this.newTaskUpdate} name='Add' type='create' />
+        <Results inputResults={this.state.resultList} />
       </div>
     );
   }

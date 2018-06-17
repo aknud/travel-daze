@@ -6,32 +6,13 @@ const port = 3005;
 app.use(bodyParser.json());
 
 let tasks = require('./controllers/tasksController');
-// let tasks = [
-//     {
-//         id: 0,
-//         name: 'Laundry'
-//     },
-//     {
-//         id: 1,
-//         name:'Dishes'
-//     },
-//     {
-//         id: 2,
-//         name:'NoDB Project'
-//     },
-//     {
-//         id: 3,
-//         name:'Clean Bathroom'
-//     },
-//     {
-//         id: 4,
-//         name:'Move Stuff'
-//     }
-// ];
-
 
 app.get('/api/tasks', tasks.read)
 
+app.post('/api/tasks', tasks.create)
+
+app.delete('/api/tasks/:id', tasks.delete)
+
 app.listen(port, ()=> {
-    console.log(`listening on ${port}`)
+    console.log(`listening on ${port}`) 
 })
