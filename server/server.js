@@ -13,6 +13,8 @@ app.post('/api/tasks', tasks.create)
 
 app.delete('/api/tasks/:id', tasks.delete)
 
+app.put('/api/tasks/:id', tasks.update)
+
 app.listen(port, ()=> {
-    console.log(`listening on ${port}`) 
+    console.log(`living in ${port}`) 
 })

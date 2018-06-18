@@ -1,51 +1,42 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-// import Button from './Button'
-
+// import axios from 'axios';
+import DeleteButton from './DeleteButton'
 
 
 class Results extends Component {
-    constructor(props) {
-        super(props);
-        console.log(111, props)
-        console.log(333333, this.props);
+    constructor() {
+        super();
 
         this.state = {
-            results: this.props.inputResults,
-            resultsDisplay: []
+            input: ''
         }
-        
-        // this.state.results = this.state.results.bind(this)
-        console.log(222, this.state)
     }
-
-    componentDidMount = () => {
-        axios.get('./api/tasks').then(response => {
-            // console.log(99999, response)
-            this.setState({
-               resultsDisplay: response.data
-            })
-        })
+    update = (item) => {
+        this.props.updateIt(item.id, this.state.input)
+        this.setState({ input: ''})
     }
-
 
     render() {
-        console.log('Check results from state', this.state.resultsDisplay)
-        let resultsList = this.state.resultsDisplay.map((item) => {
+        let resultsList = this.props.inputResults.map((item) => {
             return (
                 <div key={item.id}>
-                    <h3>{item.name}</h3>
+                    <h3>
+                        {item.name}
+                        <DeleteButton click={this.props.deleteIt} id={item.id}
+                            name='Mark Done' type='delete' />
+                        <button onClick={()=> this.update(item)}>edit</button>
+                        <input onChange={event => this.setState({input: event.target.value})}/>
+                    </h3>
                 </div>
             )
         })
-        
-
         return (
             <div>
                 {resultsList}
             </div>
-        );
+        )
     }
 }
+
 
 export default Results;

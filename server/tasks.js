@@ -18,6 +18,14 @@ module.exports = [
     {
         id: 4,
         name:'Move Stuff'
+    },
+    {
+        id: 5,
+        name:'Get Groceries'
+    },
+    {
+        id: 6,
+        name:'Mop Floors'
     }
 ];
 
